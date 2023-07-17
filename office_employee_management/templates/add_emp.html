@@ -11,7 +11,37 @@
     <title>Add Employee</title>
   </head>
   <body>
-    <h1>Add Employee is here</h1>
+    <h1>Add an Employee</h1>
+    <hr>
+
+    <form action="/add_emp" method="post">
+      {% csrf_token %}
+      <label for="first_name" >First Name</label><br>
+      <input type="text" id="first_name" placeholder="input your first name"name= 'first_name' value="{{ first_name }}"><br>
+
+      <label for="last_name">Last Name</label><br>  
+      <input type="text" id="last_name" placeholder="input your last name" name= 'last_name' value="{{ last_name }}"><br>
+        
+      <label for="depertment">Department</label><br>
+      <input type="number" id="depertment" placeholder="input your depertment" name= 'dept' value="{{ dept }}"><br>
+
+      <label for="role">Role</label><br>
+      <input type="number" id="role" placeholder="input your role" name= 'role' value="{{ role }}"><br>
+        
+      <label for="salary">Salary</label><br>
+      <input type="number" id="salary" placeholder="input your salary" name= 'salary' value="{{ salary }}"><br>
+        
+      <label for="bonus">Bonus</label><br>
+      <input type="number" id="bonus" placeholder="input your bonus" name= 'bonus' value="{{ bonus }}"><br>
+
+      <label for="phone">Phone Number</label><br>
+      <input type="number" id="phone" placeholder="input your phone" name= 'phone' value="{{ phone }}"><br>
+        
+      <hr>
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 

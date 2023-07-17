@@ -1,12 +1,36 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
+from .models import Employee, Role, Depertment
+from datetime import datetime
 
 # Create your views here.
+
 def home(request):
     return render(request, 'index.html')
 
 
 def add_emp(request):
-    return render(request, 'add_emp.html')
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        salary =int(request.POST['salary'])
+        bonus = int(request.POST['bonus'])
+        phone = int(request.POST['phone'])
+        dept = int(request.POST['dept'])
+        role = int(request.POST['role'])
+        
+        new_emp = Employee(first_name = first_name, last_name = last_name, salary = salary, 
+                 bonus = bonus, phone = phone, dept_id = dept, role_id = role, hire_date = datetime.now())
+        
+        new_emp.save()
+        
+        return HttpResponse("Employee added successfully")
+        
+        
+    elif request.method == "GET":    
+        return render(request, 'add_emp.html')
+    
+    else:
+        return HttpResponse("An Exception Occured! Employee has not been added")
 
 
 def all_emp(request):

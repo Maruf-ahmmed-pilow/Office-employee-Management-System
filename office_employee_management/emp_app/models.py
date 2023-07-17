@@ -24,7 +24,7 @@ class Employee(models.Model):
     bonus = models.IntegerField(default=0)
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
     phone = models.IntegerField(default=0)
-    hire = models.DateField()
+    #hire = models.DateField()
     def __str__(self):
         return "%s %s %s %s" %(self.first_name, self.last_name, self.phone, self.role)
         
