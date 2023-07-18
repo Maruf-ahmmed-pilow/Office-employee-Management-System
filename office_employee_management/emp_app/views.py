@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from .models import Employee, Role, Depertment
 from datetime import datetime
+from django.db.models import Q
 
 # Create your views here.
 
@@ -38,9 +39,32 @@ def all_emp(request):
 
 
 def filter_emp(request):
-    return render(request, 'filter_emp.html')
+    if request.method == "POST":
+        name = request.POST['name']
+        dept = request.POST['dept']
+        role = request.POST['role']
+        emps = Employee.objects.all()
+        
+        if name:
+            emps = emps.filter(Q(first_name__icontains = name) | Q (last_name__icontains = name))
+            
+        if dept:
+            emps = emps.filter(dept_name=dept)
+        if role:
+            emps = emps.filter(role__name = role)
+            
+        context = {
+            'emps' : emps
+            }
+        return render (request, "all_emp.html", context)
+    elif request.method == 'GET':
+        return render (request, 'filter_emp.html')
+    else:
+        return HttpResponse('An Error')
+        
 
 def remove_emp(request, emp_id = 0):
+    
     if emp_id:
         try:
             emp_to_be_removed = Employee.objects.get(id=emp_id)
