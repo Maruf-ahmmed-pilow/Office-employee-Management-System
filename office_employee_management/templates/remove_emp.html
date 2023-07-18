@@ -13,6 +13,22 @@
   <body>
     <h1>Remove Employee is here</h1>
 
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Choose Remove Employee 
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        {% for emp in emps %}
+        <li><a class="dropdown-item" href="/remove_emp{{emp.id}}">{{emp.first_name}} {{emp.last_name}} </a></li>
+        {% endfor %}
+          
+        
+      
+      </ul>
+    </div>
+
+
+
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

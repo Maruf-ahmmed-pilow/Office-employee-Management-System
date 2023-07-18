@@ -26,7 +26,7 @@ def add_emp(request):
         return HttpResponse("Employee added successfully")
         
         
-    elif request.method == "GET":    
+    elif request.method == 'GET':    
         return render(request, 'add_emp.html')
     
     else:
@@ -40,5 +40,16 @@ def all_emp(request):
 def filter_emp(request):
     return render(request, 'filter_emp.html')
 
-def remove_emp(request):
-    return render(request, 'remove_emp.html')
+def remove_emp(request, emp_id = 0):
+    if emp_id:
+        try:
+            emp_to_be_removed = Employee.objects.get(id=emp_id)
+            emp_to_be_removed.delete()
+            return HttpResponse("Employee removed successfully")
+        except:
+            return HttpResponse("Please Enter A valid Employee id")
+    emps = Employee.objects.all()
+    context = {
+        'emps': emps
+    }
+    return render(request, 'remove_emp.html', context)
