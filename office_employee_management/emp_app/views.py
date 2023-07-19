@@ -35,7 +35,12 @@ def add_emp(request):
 
 
 def all_emp(request):
-    return render(request, 'all_emp.html')
+    emps = Employee.objects.all()
+    context = {
+        'emps': emps
+    }
+    # print(context)
+    return render(request, 'all_emp.html', context)
 
 
 def filter_emp(request):
